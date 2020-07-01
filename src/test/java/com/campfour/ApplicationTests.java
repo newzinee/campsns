@@ -1,10 +1,10 @@
-package com.campfour.campsns;
+package com.campfour;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class CampsnsApplicationTests {
+class ApplicationTests {
 
 	@Test
 	void contextLoads() {
