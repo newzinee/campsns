@@ -16,10 +16,12 @@ public class KakaoConfig {
     @Value("${kakao.key.js}")
     private String jsKey;
 
+    @Value("${kakao.key.admin")
+    private String adminKey;
+
     @PostConstruct
     public void init() {
         System.out.println("--------------------KAKAO---------------------");
-        System.out.println("restApiKey = " + restApiKey);
         System.out.println("jsKey = " + jsKey);
         System.out.println("---------------------------------------------");
     }
