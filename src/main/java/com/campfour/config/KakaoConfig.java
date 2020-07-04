@@ -4,8 +4,6 @@ import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
-
 @Data
 @Component
 public class KakaoConfig {
@@ -19,10 +17,4 @@ public class KakaoConfig {
     @Value("${kakao.key.admin")
     private String adminKey;
 
-    @PostConstruct
-    public void init() {
-        System.out.println("--------------------KAKAO---------------------");
-        System.out.println("jsKey = " + jsKey);
-        System.out.println("---------------------------------------------");
-    }
 }
