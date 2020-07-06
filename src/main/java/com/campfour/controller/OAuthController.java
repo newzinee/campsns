@@ -1,5 +1,6 @@
 package com.campfour.controller;
 
+import com.campfour.config.GoogleConfig;
 import com.campfour.config.KakaoConfig;
 import com.campfour.domain.KakaoAutoToken;
 import com.campfour.domain.KakaoUserInfo;
@@ -21,13 +22,16 @@ public class OAuthController {
 
     private final String KAKAO_OAUTH_TOKEN_URL = "https://kauth.kakao.com/oauth/token";
     private final String KAKAO_USER_ACCESS_INFO_URL = "https://kapi.kakao.com/v2/user/me";
-    private final String REDIRECT_URI = "http://localhost:8081/oauth/kakao";
+    private final String KAKAO_REDIRECT_URI = "http://localhost:8081/oauth/kakao";
+    private final String GOOGLE_REDIRECT_URI = "http://localhost:8081/oauth/google";
     private final RestTemplate restTemplate;
     private final KakaoConfig kakaoConfig;
+    private final GoogleConfig googleConfig;
 
-    public OAuthController(RestTemplateBuilder restTemplateBuilder, KakaoConfig kakaoConfig) {
+    public OAuthController(RestTemplateBuilder restTemplateBuilder, KakaoConfig kakaoConfig, GoogleConfig googleConfig) {
         this.restTemplate = restTemplateBuilder.build();
         this.kakaoConfig = kakaoConfig;
+        this.googleConfig = googleConfig;
     }
 
     @GetMapping("/oauth/kakao")
@@ -36,7 +40,7 @@ public class OAuthController {
         LinkedMultiValueMap<String, Object> params = new LinkedMultiValueMap<>();
         params.add("grant_type", "authorization_code");
         params.add("client_id", kakaoConfig.getRestApiKey());
-        params.add("redirect_uri", REDIRECT_URI);
+        params.add("redirect_uri", KAKAO_REDIRECT_URI);
         params.add("code", code);
 
         HttpHeaders httpHeaders = new HttpHeaders();
@@ -70,4 +74,24 @@ public class OAuthController {
         log.info("response: " + response);
     }
 
+    @GetMapping("/oauth/google")
+    public void googleOAuthGetToken(String code, String state, String scope) {
+        log.info("code: " + code);
+        log.info("state: " + state);
+        log.info("scope: " + scope);
+
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.set(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_FORM_URLENCODED_VALUE);
+
+        LinkedMultiValueMap<String, Object> params = new LinkedMultiValueMap<>();
+        params.add("code", code);
+        params.add("client_id", googleConfig.getWebClientKey());
+        params.add("client_secret", googleConfig.getWebSecretKey());
+        params.add("redirect_uri", GOOGLE_REDIRECT_URI);
+        params.add("grant_type", "authorization_code");
+
+        HttpEntity<?> httpEntity = new HttpEntity<>(params, httpHeaders);
+        ResponseEntity<String> response = restTemplate.postForEntity("https://oauth2.googleapis.com/token", httpEntity, String.class);
+        log.info("response: " + response);
+    }
 }
