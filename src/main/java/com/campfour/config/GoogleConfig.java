@@ -8,13 +8,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class GoogleConfig {
 
-    @Value("${google.key.web}")
-    private String webKey;
+    @Value("${google.key.web.client}")
+    private String webClientKey;
 
-    @Value("${google.key.android}")
-    private String androidKey;
-
-    @Value("${google.key.ios}")
-    private String iosKey;
-
+    @Value("${google.key.web.secret}")
+    private String webSecretKey;
 }
