@@ -11,7 +11,6 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -34,7 +33,7 @@ class ApplicationTests {
 
 	@Test
 	@Transactional
-	@Rollback(false)
+//	@Rollback(false)
 	void initCampSave() throws IOException {
 
 
@@ -87,9 +86,9 @@ class ApplicationTests {
 					.buildSize(getDouble(row.getCell(16).getStringCellValue()))
 					.capacity(getInteger(row.getCell(30).getStringCellValue()))
 					.parkingCapacity(getInteger(row.getCell(31).getStringCellValue()))
-					.convenienceOption(row.getCell(32).getStringCellValue())
-					.safetyOption(row.getCell(33).getStringCellValue())
-					.extraOption(row.getCell(34).getStringCellValue())
+					.convenienceOptionStr(row.getCell(32).getStringCellValue())
+					.safetyOptionStr(row.getCell(33).getStringCellValue())
+					.extraOptionStr(row.getCell(34).getStringCellValue())
 					.useTime(row.getCell(35).getStringCellValue())
 					.charge(row.getCell(36).getStringCellValue())
 					.managingAgencyPhone(row.getCell(37).getStringCellValue())

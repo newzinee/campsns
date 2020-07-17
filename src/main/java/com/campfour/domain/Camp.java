@@ -59,9 +59,9 @@ public class Camp extends BaseEntity {
     // 편의시설 convenienceOption
     // 안전시설 safetyOption
     // 기타부대시설 extraOption
-    private String convenienceOption;
-    private String safetyOption;
-    private String extraOption;
+    private String convenienceOptionStr;
+    private String safetyOptionStr;
+    private String extraOptionStr;
 
 
     private String useTime;
@@ -73,7 +73,7 @@ public class Camp extends BaseEntity {
     private String agencyName;
 
     @Builder
-    public Camp(String name, String campType, Location location, Address address, String phone, int spotNumber, Double siteSize, Double buildSize, Integer capacity, Integer parkingCapacity, String convenienceOption, String safetyOption, String extraOption, String useTime, String charge, String managingAgencyPhone, String managingAgencyName, LocalDate baseDate, String agencyCode, String agencyName) {
+    public Camp(String name, String campType, Location location, Address address, String phone, int spotNumber, Double siteSize, Double buildSize, Integer capacity, Integer parkingCapacity, String convenienceOptionStr, String safetyOptionStr, String extraOptionStr, String useTime, String charge, String managingAgencyPhone, String managingAgencyName, LocalDate baseDate, String agencyCode, String agencyName) {
         this.name = name;
         this.campType = campType;
         this.location = location;
@@ -84,9 +84,9 @@ public class Camp extends BaseEntity {
         this.buildSize = buildSize;
         this.capacity = capacity;
         this.parkingCapacity = parkingCapacity;
-        this.convenienceOption = convenienceOption;
-        this.safetyOption = safetyOption;
-        this.extraOption = extraOption;
+        this.convenienceOptionStr = convenienceOptionStr;
+        this.safetyOptionStr = safetyOptionStr;
+        this.extraOptionStr = extraOptionStr;
         this.useTime = useTime;
         this.charge = charge;
         this.managingAgencyPhone = managingAgencyPhone;
