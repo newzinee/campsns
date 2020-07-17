@@ -26,3 +26,5 @@ jobs:
       run: chmod +x gradlew
     - name: Build with Gradle
       run: ./gradlew build
+      env:
+        google.key.web.client: ${{secrets.GOOGLE_KEY_WEB_CLIENT}}
